@@ -549,7 +549,9 @@ for (const link of document.querySelectorAll('[data-photo]:not([hidden])')) {
     if (typeof viewer.showModal !== 'function') return;
     event.preventDefault();
     trigger = link;
-    gallery = [link, ...link.parentElement.querySelectorAll('[data-photo][hidden]')];
+    const hiddenPhotos = [...link.parentElement.querySelectorAll('[data-photo][hidden]')];
+    const galleryName = link.getAttribute('data-gallery');
+    gallery = [link, ...hiddenPhotos.filter(photo => photo.getAttribute('data-gallery') === galleryName)];
     previous.hidden = next.hidden = gallery.length < 2;
     index = 0;
     showImage();
