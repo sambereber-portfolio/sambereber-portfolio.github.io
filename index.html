@@ -166,6 +166,16 @@ img.image-pending, .image-pending {
 @media (prefers-reduced-motion: reduce) {
   .image-pending { animation: none; }
 }
+@media (prefers-reduced-motion: no-preference) {
+  .cards > li.card-reveal {
+    animation: card-reveal 420ms cubic-bezier(.2, .7, .3, 1) var(--card-reveal-delay, 0ms) both;
+  }
+  .cards > li.card-reveal:focus-within { animation: none; }
+  @keyframes card-reveal {
+    from { opacity: .25; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
 </style>
 <script>
 function clearImageSkeleton(event) {
@@ -610,6 +620,25 @@ viewer.addEventListener('keydown', event => {
 for (const element of document.querySelectorAll('[src^="portfolio-asset:"], [href^="portfolio-asset:"]')) {
   const attribute = element.hasAttribute('src') ? 'src' : 'href';
   element.setAttribute(attribute, window.portfolioImages[element.getAttribute(attribute).slice(16)]);
+}
+</script>
+<script>
+if ('IntersectionObserver' in window && matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+  const revealObserver = new IntersectionObserver(entries => {
+    let revealIndex = 0;
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      const card = entry.target;
+      revealObserver.unobserve(card);
+      card.style.setProperty('--card-reveal-delay', Math.min(revealIndex, 3) * 70 + 'ms');
+      card.classList.add('card-reveal');
+      revealIndex += 1;
+    }
+  }, { threshold: .1 });
+
+  for (const card of document.querySelectorAll('.cards > li')) {
+    if (card.getBoundingClientRect().top >= window.innerHeight) revealObserver.observe(card);
+  }
 }
 </script>
 </body>
