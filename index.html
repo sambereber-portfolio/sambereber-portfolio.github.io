@@ -80,6 +80,7 @@ h2 { font-size: clamp(1.95rem,4.2vw,3.15rem); line-height: 1.08; letter-spacing:
 .drawings h3 { margin-top: 20px; font-size: 1.05rem; }
 .plan-card img { object-fit: contain; padding: 7px; background: white; }
 .contact { display: flex; flex-wrap: wrap; gap: 20px 36px; align-items: start; justify-content: space-between; padding-block: 40px; }
+.contact .contact-label { font-size: .9375rem; font-weight: 650; line-height: 1.4; margin-bottom: 5px; }
 .contact-links { list-style: none; padding: 0; margin: 9px 0 0; display: grid; gap: 5px; }
 .contact-links a { color: var(--teal); font-weight: 650; text-decoration: underline; text-underline-offset: .2em; }
 .foot { justify-content: flex-end; border-top: 1px solid var(--line); border-bottom: 0; color: var(--muted); font-size: .83rem; }
@@ -504,7 +505,7 @@ document.addEventListener('error', clearImageSkeleton, true);
   </section>
   <section class="shell contact" id="contact" aria-labelledby="contact-title">
     <div>
-      <h2 id="contact-title">You may contact</h2>
+      <h2 class="contact-label" id="contact-title">You may contact:</h2>
       <p><strong>Samuel Bereber</strong><br>Civil &amp; Fit-Out Engineer</p>
       <ul class="contact-links">
         <li><a href="https://wa.me/971503796013">+971 50 379 6013 (WhatsApp)</a></li>
@@ -513,8 +514,7 @@ document.addEventListener('error', clearImageSkeleton, true);
       </ul>
     </div>
     <div>
-      <h2>Completed Project</h2>
-      <p><strong>Featured Company Pages</strong></p>
+      <h2 class="contact-label">Featured Company Page:</h2>
       <ul class="contact-links">
         <li><a href="https://www.facebook.com/JNFABRICATION">JN Custom Fabrication <span aria-hidden="true">↗</span></a></li>
         <li><a href="https://www.facebook.com/greycontraiding">Grey Construction Trading <span aria-hidden="true">↗</span></a></li>
